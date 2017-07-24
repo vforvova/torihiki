@@ -1,4 +1,4 @@
-# Transaction (Proof of concept)
+# Simple Transaction (Proof of concept)
 
 ## Usage
 
