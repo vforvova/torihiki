@@ -1,0 +1,2 @@
+module SimpleTransaction
+end
