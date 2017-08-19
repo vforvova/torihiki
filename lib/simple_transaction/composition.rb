@@ -10,14 +10,14 @@ module SimpleTransaction
 
     def map(callable = nil, &block)
       input = block || callable
-      raise CompositionError.new(@composition.size) unless input.respond_to? :call
+      raise ComposedNonCallableError.new(@composition.size) unless input.respond_to? :call
       self.class.new(@composition + [input])
     end
   end
 
-  class CompositionError < StandardError
+  class ComposedNonCallableError < StandardError
     def message
-      "You have to specify block or provide callable argument"
+      "Composition recieved a function which does not respond to method call"
     end
   end
 end
