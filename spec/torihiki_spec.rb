@@ -1,13 +1,13 @@
 require "spec_helper"
 
-RSpec.describe SimpleTransaction do
+RSpec.describe Torihiki do
   it "has a version number" do
-    expect(SimpleTransaction::VERSION).not_to be nil
+    expect(Torihiki::VERSION).not_to be nil
   end
 
   context 'when included' do
     class TransactionClass
-      include SimpleTransaction
+      include Torihiki
     end
 
     subject { TransactionClass }

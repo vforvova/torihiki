@@ -1,6 +1,6 @@
-require 'simple_transaction/composition'
+require 'torihiki/composition'
 
-module SimpleTransaction
+module Torihiki
   def self.included(host)
     host.extend(ClassMethods)
   end

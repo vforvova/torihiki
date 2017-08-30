@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe SimpleTransaction::Composition do
+RSpec.describe Torihiki::Composition do
   it { expect(subject.instance_variable_get(:@composition).frozen?).to be_truthy }
   it { is_expected.to respond_to :map }
   it { is_expected.to respond_to :call }
@@ -137,7 +137,7 @@ RSpec.describe SimpleTransaction::Composition do
     describe '#map' do
       it 'raises an error' do
         expect { io }.to raise_error(
-          SimpleTransaction::CompositionError,
+          Torihiki::CompositionError,
           'You have to specify block or provide callable argument'
         )
       end

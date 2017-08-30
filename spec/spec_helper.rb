@@ -1,6 +1,6 @@
 require "bundler/setup"
 require 'pry'
-require "simple_transaction"
+require "torihiki"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

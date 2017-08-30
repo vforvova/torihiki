@@ -1,4 +1,4 @@
-module SimpleTransaction
+module Torihiki
   class Composition
     def initialize(composition = [])
       @composition = composition.freeze
