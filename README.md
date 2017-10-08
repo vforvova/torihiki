@@ -1,16 +1,17 @@
 # Torihiki
 
-Torihiki is a simple DSL inspired by [dry-transaction]() gem.
-It builds a composition of functions which would help you create business
-transactions without magic.
+## Introduction
+Torihiki is a DSL for building business transactions built using a concept
+of function composition.
 
-Torihiki doesn’t include error handling out of the box, but you feel free
-to use [dry-either]() or anything else for it.
+>Torihiki doesn’t include error handling out of the box as it [dry-transaction]()
+>does, but you feel free to use [dry-either]() or anything else for it.
 
 
-## What the function composition exactly is?
+### What the function composition exactly is?
 Function composition is applying result of a function as an argument to next one
 in a chain.
+
 For example, we have functions `F` and `G` and a context `x`. The composition
 `G` *of* `F` *of* `x`, would look like `G(F(x))`. In other words result of `F(x)`
 will be received by `G` as an argument. We also could say that
@@ -21,7 +22,7 @@ G(F(x)) = (G ∘ F)(x)
 ```
 
 
-## How is this theory related to the subject?
+### How is this theory related to the subject?
 Transactions in common are just an ordered actions around context we could think
 about as a single object. Function composition is the same thing from this
 point of view.
@@ -35,29 +36,52 @@ gem 'torihiki', '~> 0.1.0'
 
 2.  Run `bundle install`
 
-3. Do great things!
+3.  Do great things!
 
 
-## Usage [WIP]
-Include Torihiki into your class and use `map` to add operations into your composition
+## Usage
 
-### Build simple composition [WIP]
+### Simple transaction
+Lets do very silly `SquareOfSumTransaction` which gets a hash with keys `x` and `y`
+with numeric values and returns a square if their sum. It is not a real life example
+but it help us explore the DSL.
+
+Torihiki is a module which expects you to include it into your class:
 ```ruby
-class Transaction
+class SquareOfSumTransaction
+  include Torihiki
+end
+```
+
+Now we need to create some operations. The simpliest way to do it is call `map`
+method and provide implementation.
+
+>Method `map` accepts a `block`, `proc`, `lambda` or object
+>which has method `call` implemented.
+
+```ruby
+class SquareOfSumTransaction
   include Torihiki
 
-  map AuthenticationService
-  map ValidationService
-  map do
-    # some operations
-  end
-  map do
-    # persistence operation
-  end
+  map { |context| context[:x] + context[:y] }
+  map { |sum| sum ** 2 }
 end
-
-Transaction.call(context)
 ```
+
+And now lets do the calculations.
+```ruby
+SquareOfSumTransaction.call(x: 1, y: 2) # => 9
+SquareOfSumTransaction.call(x: 3, y: 5) # => 64
+```
+
+Torihiki remembers sequence of `map` calls. When we send `call` with a context
+to transaction class it will execute first block using the it. Result of the first
+block call will be provided to the second one as a parameter and so on. Result
+of the last one will be an output of the whole transaction.
+
+
+### Real life transaction
+
 
 <!-- ### Usage with Dry::Either
 Work in progress
