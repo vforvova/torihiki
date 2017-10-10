@@ -138,4 +138,6 @@ end
 ```
 -->
 
-## Contribution Guide [WIP]
+## Contribution Guide
+
+Just add pull request =)
