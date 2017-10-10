@@ -4,18 +4,20 @@
 Torihiki is a DSL for building business transactions built using a concept
 of function composition.
 
->Torihiki doesn’t include error handling out of the box as it [dry-transaction]()
->does, but you feel free to use [dry-either]() or anything else for it.
+>Torihiki doesn’t include error handling out of the box as it
+>[dry-transaction](https://github.com/dry-rb/dry-transaction) does, but you feel
+>free to use Either from [dry-monad](https://github.com/dry-rb/dry-monads)
+>or anything else for it.
 
 
-### What the function composition exactly is?
-Function composition is applying result of a function as an argument to next one
-in a chain.
+### What exactly is the function composition?
+Function composition is applying result of a function as an argument
+to the next one in a chain.
 
 For example, we have functions `F` and `G` and a context `x`. The composition
 `G` *of* `F` *of* `x`, would look like `G(F(x))`. In other words result of `F(x)`
 will be received by `G` as an argument. We also could say that
-`G` *composed with* `F` or `G` after `F`. In algebra it could be written like:
+`G` is *composed with* `F` or `G` is after `F`. In algebra it could be written like:
 
 ```
 G(F(x)) = (G ∘ F)(x)
@@ -56,8 +58,8 @@ end
 Now we need to create some operations. The simpliest way to do it is call `map`
 method and provide implementation.
 
->Method `map` accepts a `block`, `proc`, `lambda` or object
->which has method `call` implemented.
+>  Method `map` accepts a `block`, `proc`, `lambda` or object
+>  which has method `call` implemented.
 
 ```ruby
 class SquareOfSumTransaction
@@ -77,10 +79,16 @@ SquareOfSumTransaction.call(x: 3, y: 5) # => 64
 Torihiki remembers sequence of `map` calls. When we send `call` with a context
 to transaction class it will execute first block using the it. Result of the first
 block call will be provided to the second one as a parameter and so on. Result
-of the last one will be an output of the whole transaction.
+of the last one will be returned.
 
 
-### Real life transaction
+<!-- ### Real life transaction
+How does this techniq work in real app? For example you have Playlist application
+where people are able to share their playlists.
+```ruby
+class Authentication
+end
+``` -->
 
 
 <!-- ### Usage with Dry::Either
