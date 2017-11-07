@@ -137,8 +137,8 @@ RSpec.describe Torihiki::Composition do
     describe '#map' do
       it 'raises an error' do
         expect { io }.to raise_error(
-          Torihiki::CompositionError,
-          'You have to specify block or provide callable argument'
+          Torihiki::ComposedNonCallableError,
+          'Composition recieved a function which does not respond to method call'
         )
       end
     end
