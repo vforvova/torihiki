@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "bundler", ">= 1.5.0"
   s.add_development_dependency "rubocop", "~> 0.49.0"
   s.add_development_dependency "rspec", "~> 3.2"
-  s.add_development_dependency "pry", "~> 0.10.4"
+  s.add_development_dependency "pry", "~> 0.13.1"
 
   s.files = `git ls-files`.split("\n")
   s.executables = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? $1 : nil}.compact
