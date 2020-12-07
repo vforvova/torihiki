@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "torihiki"
 
   s.add_development_dependency "bundler", ">= 1.5.0"
-  s.add_development_dependency "rubocop", "~> 0.49.0"
+  s.add_development_dependency "rubocop", "~> 1.5.2"
   s.add_development_dependency "rspec", "~> 3.2"
   s.add_development_dependency "pry", "~> 0.13.1"
 
